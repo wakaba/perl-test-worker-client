@@ -1,0 +1,84 @@
+=head1 NAME
+
+Test::Worker::Client - Mock Worker Client Class for Tests
+
+=head1 SYNOPSIS
+
+  use Test::Worker::Client;
+  Test::Worker::Client->set_test_root_directory;
+  {
+      Test::Worker::Client->new->insert(
+          'Job::Class',
+          {
+              arg1 => 'value1',
+              arg2 => 'value2',
+          },
+      );
+  }
+  my $job = Test::Worker::Client->new->get_next_job;
+  is_deeply $job->as_testable_hash, {
+      class => 'Job::Class',
+      arg => {
+          arg1 => 'value1',
+          arg2 => 'value2',
+      },
+      run_after => undef,
+  };
+  $job->completed;
+
+=head1 METHODS
+
+=over 4
+
+=item Test::Worker::Client->set_test_root_directory
+
+Set worker job directory.  Inserted worker jobs are stored as files in
+this directory.
+
+=item $client = Test::Worker::Client->new
+
+Return an instance of the worker client.
+
+=item $job = $client->get_next_job
+
+Return a L<Test::Worker::Client::Job> object if there are
+non-completed jobs.
+
+=item $client->execute_job($job)
+
+Execute the given job.
+
+=item $client->get_job_after_complete_jobs_unless($regexp)
+
+Repeat C<< $client->get_next_job->completed >> until the C<<
+$job->class >> matches C<$regexp> (or C<< $client->get_next_job >>
+returns C<undef>) and then return the next job (which matches
+C<$regexp>), if any, or C<undef>.
+
+=item $client->insert(...)
+
+Insert a job.  This method provides API compatible with the real
+worker client class.
+
+=back
+
+=head1 SEE ALSO
+
+L<Test::Worker::Client::Job>, L<WorkerManager::Client::TheSchwartz>.
+
+=head1 AUTHOR
+
+Wakaba (id:wakabatan) <wakabatan@hatena.ne.jp>
+
+=head1 CONTRIBUTOR
+
+Mechairoi (id:mechairoi).
+
+=head1 LICENSE
+
+Copyright 2010 Hatena <http://www.hatena.ne.jp/>
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut

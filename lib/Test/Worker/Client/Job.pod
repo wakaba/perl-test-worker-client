@@ -1,0 +1,63 @@
+=head1 NAME
+
+Test::Worker::Client::Job - Mock Worker Job Object for Tests
+
+=head1 SYNOPSIS
+
+  use Test::Worker::Client::Job;
+  my $job = Test::Worker::Client::Job->new($f, [
+      'Worker::Job::Class',
+      {arg1 => value1, ...},
+      {run_after => ..., ...},
+  ]);
+
+=head1 METHODS
+
+=over 4
+
+=item $job = Test::Worker::Client::Job->new($f, [$class, $args, $options])
+
+Constructs a new instance of the job.  Argument C<$f> is the
+L<Path::Class::File> object that represents the job (see also
+L<Test::Worker::Client>).  Argument C<$class> is the name of the
+worker job.  Argument C<$args> is a hash reference that would be
+returned by the C<< $job->arg >> method.  Argument C<$options> is a
+hash reference containing job options such as C<run_after> and
+C<uniqkey>.
+
+=item $job->class, arg, failures, run_after, uniqkey, priority, completed
+
+These methods provide APIs compatible with the real worker job object.
+
+Invoking the C<completed> method removes the file represented by the
+C<< $job->f >> object.
+
+=item $job->f
+
+Returns the L<Path::Class::File> object that represents the job.
+
+=item $obj->is_completed
+
+Returns whether the C<< $job->completed >> method has been invoked or
+not.
+
+=item $obj->as_testable_hash
+
+Returns a hash reference, which contains properties such as C<class>
+and C<arg>.  The hash reference might be useful to evaluate the result
+of the test.
+
+=back
+
+=head1 AUTHOR
+
+Wakaba (id:wakabatan) <wakabatan@hatena.ne.jp>
+
+=head1 LICENSE
+
+Copyright 2010 Hatena <http://www.hatena.ne.jp/>
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
