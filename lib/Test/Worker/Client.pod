@@ -74,8 +74,8 @@ Wakaba (id:wakabatan) <wakabatan@hatena.ne.jp>.
 
 This module was initially developed as part of Ugomemo Hatena project,
 then renewed as part of Hatena Message 2010 project.  Following people
-contributed the module: mechairoi, motemen, hakobe, shibayu36,
-nanto_vi, suzak, hitode909.
+contributed to the module: mechairoi, motemen, hakobe, shibayu36,
+nanto_vi, suzak, and hitode909.
 
 =head1 LICENSE
 
