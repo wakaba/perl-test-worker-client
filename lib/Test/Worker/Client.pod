@@ -66,6 +66,25 @@ worker client class.
 
 L<Test::Worker::Client::Job>, L<WorkerManager::Client::TheSchwartz>.
 
+=head1 DISTRIBUTION
+
+Latest version of this module is available from
+<https://github.com/wakaba/perl-test-worker-client>.
+
+If you prefer tarball, it is available at
+<http://wakaba.github.com/packages/perl/#Test-Worker-Client>.
+However, the tarball might be outdated.
+
+=head1 CHANGES
+
+=over 4
+
+=item 1.0 (2012-03-21)
+
+First packaged version.
+
+=back
+
 =head1 AUTHOR
 
 Wakaba (id:wakabatan) <wakabatan@hatena.ne.jp>.
