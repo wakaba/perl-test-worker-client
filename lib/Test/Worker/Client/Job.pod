@@ -51,11 +51,15 @@ of the test.
 
 =head1 AUTHOR
 
-Wakaba (id:wakabatan) <wakabatan@hatena.ne.jp>
+Wakaba (id:wakabatan) <wakabatan@hatena.ne.jp>.
+
+=head1 ACKNOWLEDGEMENTS
+
+See L<Test::Worker::Client>.
 
 =head1 LICENSE
 
-Copyright 2010 Hatena <http://www.hatena.ne.jp/>
+Copyright 2010-2012 Hatena <http://www.hatena.ne.jp/>.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

@@ -68,15 +68,18 @@ L<Test::Worker::Client::Job>, L<WorkerManager::Client::TheSchwartz>.
 
 =head1 AUTHOR
 
-Wakaba (id:wakabatan) <wakabatan@hatena.ne.jp>
+Wakaba (id:wakabatan) <wakabatan@hatena.ne.jp>.
 
-=head1 CONTRIBUTOR
+=head1 ACKNOWLEDGEMENTS
 
-Mechairoi (id:mechairoi).
+This module was initially developed as part of Ugomemo Hatena project,
+then renewed as part of Hatena Message 2010 project.  Following people
+contributed the module: mechairoi, motemen, hakobe, shibayu36,
+nanto_vi, suzak, hitode909.
 
 =head1 LICENSE
 
-Copyright 2010 Hatena <http://www.hatena.ne.jp/>
+Copyright 2010-2012 Hatena <http://www.hatena.ne.jp/>.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
