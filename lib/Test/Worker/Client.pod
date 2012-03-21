@@ -98,7 +98,7 @@ nanto_vi, suzak, and hitode909.
 
 =head1 LICENSE
 
-Copyright 2010-2012 Hatena <http://www.hatena.ne.jp/>.
+Copyright 2009-2012 Hatena <http://www.hatena.ne.jp/>.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
