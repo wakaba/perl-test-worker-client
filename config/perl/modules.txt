@@ -1,0 +1,7 @@
+Carp
+Class::Accessor::Fast
+Class::Data::Inheritable
+Data::Dumper
+File::Temp
+Path::Class
+UNIVERSAL::require
