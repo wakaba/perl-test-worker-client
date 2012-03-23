@@ -176,6 +176,16 @@ sub get_sorted_jobs {
 
     die "you need to specify coderef for sort", Carp::longmess if !$code;
 
+    my $jobs = $self->get_all_jobs;
+
+    @$jobs = sort { $code->($a, $b) } @$jobs;
+
+    return $jobs;
+}
+
+sub get_all_jobs {
+    my ($self) = @_;
+
     my $d = $self->root;
     return [] unless -d $d;
 
@@ -186,8 +196,6 @@ sub get_sorted_jobs {
         my $job = $self->get_next_job;
         push @$jobs, $job;
     }
-
-    @$jobs = sort { $code->($a, $b) } @$jobs;
 
     return $jobs;
 }

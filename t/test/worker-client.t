@@ -29,7 +29,7 @@ sub _no_use_job : Test(1) {
 
 sub _worker_client : Test(2) {
     Test::Worker::Client->set_test_root_directory;
-    
+
     Test::Worker::Client->new->insert(
         'test::worker::package',
         {
@@ -37,7 +37,7 @@ sub _worker_client : Test(2) {
             arg2 => 'value2',
         },
     );
-    
+
     my $job = Test::Worker::Client->new->get_next_job;
     is_deeply($job->as_testable_hash, {
         class => 'test::worker::package',
@@ -52,7 +52,7 @@ sub _worker_client : Test(2) {
 
 sub _worker_client_multiple : Test(1) {
     Test::Worker::Client->set_test_root_directory;
-    
+
     Test::Worker::Client->new->insert(
         'test::worker::package',
         {
@@ -92,7 +92,7 @@ sub _worker_client_multiple : Test(1) {
 
 sub _run_after : Test(2) {
     Test::Worker::Client->set_test_root_directory;
-    
+
     Test::Worker::Client->new->insert(
         'test::worker::package',
         {
@@ -103,7 +103,7 @@ sub _run_after : Test(2) {
             run_after => 123,
         },
     );
-    
+
     my $job = Test::Worker::Client->new->get_next_job;
     is_deeply($job->as_testable_hash, {
         class => 'test::worker::package',
@@ -155,10 +155,10 @@ sub _uniqkey : Test(5) {
         uniqkey => 'abc @1',
     };
     $job1->completed;
-    
+
     my $job2 = Test::Worker::Client->new->get_next_job;
     ng $job2;
-    
+
     Test::Worker::Client->new->insert(
         'test::worker::uniqkey',
         {
@@ -197,7 +197,7 @@ sub _uniqkey : Test(5) {
 
 sub _insert_time : Test(2) {
     Test::Worker::Client->set_test_root_directory;
-    
+
     Test::Worker::Client->new->insert(
         'test::worker::package',
         {
@@ -209,7 +209,7 @@ sub _insert_time : Test(2) {
             insert_time => 2000,
         },
     );
-    
+
     my $job = Test::Worker::Client->new->get_next_job;
     is_deeply($job->as_testable_hash, {
         class => 'test::worker::package',
@@ -234,32 +234,53 @@ sub _worker_client_ignore_job : Test(1) {
             arg2 => 'value2',
         },
     );
-    
+
     my $job = Test::Worker::Client->new->get_next_job;
     ng $job;
 }
 
 sub _complete_jobs_unless : Test(4) {
     Test::Worker::Client->set_test_root_directory;
-    
+
     Test::Worker::Client->new->insert('test::worker::class1');
     Test::Worker::Client->new->insert('test::worker::class2');
     Test::Worker::Client->new->insert('test::worker::class3');
     Test::Worker::Client->new->insert('test::worker::class4');
-    
+
     my $j1 = Test::Worker::Client->new->get_job_after_complete_jobs_unless(qr/class[23]/);
     like $j1->class, qr/^test::worker::class[23]$/;
     $j1->completed;
-    
+
     my $j2 = Test::Worker::Client->new->get_job_after_complete_jobs_unless(qr/class[23]/);
     like $j2->class, qr/^test::worker::class[23]$/;
     $j2->completed;
-    
+
     my $j3 = Test::Worker::Client->new->get_job_after_complete_jobs_unless(qr/class[23]/);
     ng $j3;
 
     my $j4 = Test::Worker::Client->new->get_job_after_complete_jobs_unless(qr/class[23]/);
     ng $j4;
+}
+
+sub _get_all_jobs : Test(3) {
+    Test::Worker::Client->set_test_root_directory;
+
+    my $wc = Test::Worker::Client->new;
+    $wc->insert('test::worker::class',{arg => 1});
+    $wc->insert('test::worker::class',{arg => 2});
+
+    my $jobs = $wc->get_all_jobs;
+    is @$jobs, 2;
+    is $jobs->[0]->class, 'test::worker::class';
+    is $jobs->[1]->class, 'test::worker::class';
+}
+
+sub _get_all_jobs_no_job : Test(1) {
+    Test::Worker::Client->set_test_root_directory;
+
+    my $wc = Test::Worker::Client->new;
+    my $jobs = $wc->get_all_jobs;
+    is @$jobs, 0;
 }
 
 sub _get_sorted_jobs : Test(4) {
